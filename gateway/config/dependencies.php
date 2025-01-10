@@ -1,6 +1,7 @@
 <?php
 
 use Gateway\Actions\ListePraticiensAction;
+use Gateway\Actions\PraticienAction;
 use Psr\Container\ContainerInterface;
 
 $settings = require __DIR__ . '/settings.php';
@@ -19,5 +20,9 @@ return [
     //On définit la dépendance ListePraticiensAction
     ListePraticiensAction::class => function(ContainerInterface $container) {
         return new ListePraticiensAction($container->get('guzzle'));
+    },
+
+    PraticienAction::class => function(ContainerInterface $container) {
+        return new PraticienAction($container->get('guzzle'));
     },
 ];

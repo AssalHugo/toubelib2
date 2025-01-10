@@ -11,13 +11,13 @@ use Slim\Exception\HttpForbiddenException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpNotFoundException;
 
-class ListePraticiensAction extends AbstractAction
+class PraticienAction extends AbstractAction
 {
 
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
         try {
-            return $this->remote->get('praticiens');
+            return $this->remote->get('praticiens/' . $args['id']);
         }
         catch (ClientException $e) {
             match ($e->getCode()) {
