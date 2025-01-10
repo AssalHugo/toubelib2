@@ -2,14 +2,13 @@
 
 namespace toubeelib\application\actions;
 
+use Gateway\renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Validator;
 use Slim\Exception\HttpBadRequestException;
-use toubeelib\application\renderer\JsonRenderer;
 use toubeelib\core\services\rdv\ServiceRendezVousInterface;
 use toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException;
-use function FastRoute\cachedDispatcher;
 
 class AnnulerRendezVousAction extends AbstractAction
 {

@@ -3,7 +3,7 @@
 use Gateway\Actions\ExampleAction;
 use Gateway\Actions\ListePraticiensAction;
 use Slim\App;
-use toubelib\gateway\middlewares\AddHeaders;
+use Gateway\middlewares\AddHeaders;
 
 
 return function (App $app): App {

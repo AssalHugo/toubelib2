@@ -1,11 +1,10 @@
 <?php
 
-namespace toubelib\gateway\middlewares;
+namespace Gateway\middlewares;
 
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Http\Message\ResponseInterface;
-use Slim\Exception\HttpUnauthorizedException;
 
 class AddHeaders
 {

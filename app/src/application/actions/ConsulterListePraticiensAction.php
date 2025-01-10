@@ -2,9 +2,9 @@
 
 namespace toubeelib\application\actions;
 
+use Gateway\renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use toubeelib\application\renderer\JsonRenderer;
 use toubeelib\core\services\praticien\ServicePraticienInterface;
 
 class ConsulterListePraticiensAction extends AbstractAction
