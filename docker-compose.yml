@@ -62,5 +62,4 @@ services:
       - toubeelib.net
     depends_on:
       - toubeelib.db
-    command: php -S 0.0.0.0:80 -t /var/php/
-
+    command: php -S 0.0.0.0:80 -t /var/php/public
