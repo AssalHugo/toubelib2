@@ -1,6 +1,7 @@
 <?php
 
 use Gateway\Actions\ExampleAction;
+use Gateway\Actions\GenericGetCatalogAction;
 use Gateway\Actions\ListePraticiensAction;
 use Gateway\Actions\PraticienAction;
 use Slim\App;
@@ -17,10 +18,13 @@ return function (App $app): App {
         return $response;
     });
 
-    $app->get('/praticiens', ListePraticiensAction::class)
+    $app->get('/praticiens', GenericGetCatalogAction::class)
         ->add(new AddHeaders);
 
-    $app->get('/praticiens/{id}', PraticienAction::class)
+    $app->get('/praticiens/{id}', GenericGetCatalogAction::class)
+        ->add(new AddHeaders);
+
+    $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class)
         ->add(new AddHeaders);
 
     return $app;

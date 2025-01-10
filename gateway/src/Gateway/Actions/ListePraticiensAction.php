@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpForbiddenException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\HttpUnauthorizedException;
 
 class ListePraticiensAction extends AbstractAction
 {
@@ -22,6 +23,7 @@ class ListePraticiensAction extends AbstractAction
         catch (ClientException $e) {
             match ($e->getCode()) {
                 400, 404 => throw new HttpNotFoundException($rq, "Ressource non trouvée"),
+                401 => throw new HttpUnauthorizedException($rq, "Non autorisé"),
                 403 => throw new HttpForbiddenException($rq, "Accès refusé"),
                 default => throw new HttpInternalServerErrorException($rq, "Erreur interne du serveur : " . $e->getMessage()),
             };

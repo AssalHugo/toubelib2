@@ -12,15 +12,27 @@ use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpUnauthorizedException;
 
-class PraticienAction extends AbstractAction
+class GenericGetCatalogAction extends AbstractAction
 {
-
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
-        try {
-            return $this->remote->get('praticiens/' . $args['id']);
+        $method = $rq->getMethod();
+        $path = $rq->getUri()->getPath();
+        $options = ['query' => $rq->getQueryParams()];
+
+        if ($method === 'POST' || $method === 'PUT' || $method === 'PATCH') {
+            $options['json'] = $rq->getParsedBody();
         }
-        catch (ClientException $e) {
+
+        $auth = $rq->getHeader('Authorization') ?? null;
+
+        if (!empty($auth)) {
+            $options['headers'] = ['Authorization' => $auth];
+        }
+
+        try {
+            return $this->remote->request($method, $path, $options);
+        }catch (ClientException $e) {
             match ($e->getCode()) {
                 400, 404 => throw new HttpNotFoundException($rq, "Ressource non trouvée"),
                 401 => throw new HttpUnauthorizedException($rq, "Non autorisé"),

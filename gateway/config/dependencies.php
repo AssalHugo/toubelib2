@@ -1,5 +1,6 @@
 <?php
 
+use Gateway\Actions\GenericGetCatalogAction;
 use Gateway\Actions\ListePraticiensAction;
 use Gateway\Actions\PraticienAction;
 use Psr\Container\ContainerInterface;
@@ -24,5 +25,9 @@ return [
 
     PraticienAction::class => function(ContainerInterface $container) {
         return new PraticienAction($container->get('guzzle'));
+    },
+
+    GenericGetCatalogAction::class => function(ContainerInterface $container) {
+        return new GenericGetCatalogAction($container->get('guzzle'));
     },
 ];
