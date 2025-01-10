@@ -2,7 +2,6 @@
 
 namespace Gateway\Actions;
 
-use Gateway\renderer\JsonRenderer;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\ServerException;
@@ -18,11 +17,9 @@ class ListePraticiensAction extends AbstractAction
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         try {
-            $response = $this->remote->get('/praticiens');
-            $response_data = json_decode((string)$response->getBody(), true);
-            return JsonRenderer::render($response_data, 200, $response);
+            return $this->remote->get('praticiens');
         } catch (ConnectException|ServerException $e) {
-            throw new HttpInternalServerErrorException($request, "Erreur interne du serveur" . $e->getMessage());
+            throw new HttpInternalServerErrorException($request, "Erreur interne du serveur" . $e->getMessage() . $e->getResponse()->getBody());
         } catch (ClientException $e) {
             match ($e->getCode()) {
                 404 => throw new HttpNotFoundException($request, "Ressource non trouvée"),

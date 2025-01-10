@@ -4,11 +4,11 @@ namespace toubeelib\application\actions;
 
 use DateTimeImmutable;
 use Exception;
-use Gateway\renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Validator as v;
 use Slim\Exception\HttpBadRequestException;
+use toubeelib\application\renderer\JsonRenderer;
 use toubeelib\core\dto\InputRendezVousDTO;
 use toubeelib\core\services\rdv\ServiceRendezVousInterface;
 use toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException;

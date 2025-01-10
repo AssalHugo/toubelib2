@@ -1,6 +1,6 @@
 <?php
 
-namespace Gateway\renderer;
+namespace toubeelib\application\renderer;
 
 use Psr\Http\Message\ResponseInterface as Response;
 
