@@ -3,6 +3,7 @@
 use Gateway\Actions\ExampleAction;
 use Gateway\Actions\ListePraticiensAction;
 use Slim\App;
+use toubelib\gateway\middlewares\AddHeaders;
 
 
 return function (App $app): App {
@@ -15,7 +16,8 @@ return function (App $app): App {
         return $response;
     });
 
-    $app->get('/praticiens', ListePraticiensAction::class);
+    $app->get('/praticiens', ListePraticiensAction::class)
+        ->add(new AddHeaders);
 
     return $app;
 };
