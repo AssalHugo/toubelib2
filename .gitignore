@@ -4,4 +4,5 @@
 *.idea
 *.lock
 app/vendor/
+gateway/vendor
 *.ini
