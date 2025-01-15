@@ -14,7 +14,7 @@ return [
     //On définit la dépendance guzzle
     'guzzle' => function(ContainerInterface $container) {
         return new GuzzleHttp\Client([
-            'base_uri' => $container->get('toubelib.api')
+            'base_uri' => $container->get('toubeelib.api')
         ]);
     },
 
