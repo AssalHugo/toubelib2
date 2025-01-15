@@ -56,7 +56,7 @@ class ConsulterPraticienAction extends AbstractAction
                         "href" => '/praticiens/' . $id
                     ],
                     'specialites' => [
-                        "href" => '/praticiesn/' . $id . '/specialites'
+                        "href" => '/praticiens/' . $id . '/specialites'
                     ]
                 ]
             ];
