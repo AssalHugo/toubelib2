@@ -18,10 +18,10 @@ return function (App $app): App {
         return $response;
     });
 
-    $app->get('/praticiens', GenericGetCatalogAction::class)
+    $app->get('/praticiens', ListePraticiensAction::class)
         ->add(new AddHeaders);
 
-    $app->get('/praticiens/{id}', GenericGetCatalogAction::class)
+    $app->get('/praticiens/{id}',  PraticienAction::class)
         ->add(new AddHeaders);
 
     $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class)
