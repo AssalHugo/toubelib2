@@ -27,5 +27,15 @@ return function (App $app): App {
     $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class)
         ->add(new AddHeaders);
 
+    $app->post('/rdvs', GenericGetCatalogAction::class);
+
+    $app->get('/rdvs/{ID-RDV}', GenericGetCatalogAction::class);
+
+    $app->patch('/rdvs/{ID-RDV}', GenericGetCatalogAction::class);
+
+    $app->delete('/rdvs/{ID-RDV}', GenericGetCatalogAction::class);
+
+    $app->get('/patients/{ID-PATIENT}/rdvs', GenericGetCatalogAction::class);
+
     return $app;
 };

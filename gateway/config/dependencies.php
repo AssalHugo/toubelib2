@@ -4,6 +4,10 @@ use Gateway\Actions\GenericGetCatalogAction;
 use Gateway\Actions\ListePraticiensAction;
 use Gateway\Actions\PraticienAction;
 use Psr\Container\ContainerInterface;
+use Gateway\Actions\CreerRendezVousAction;
+use Gateway\Actions\ConsulterRendezVousAction;
+use Gateway\Actions\ModifierOuGererCycleRendezVousAction;
+use Gateway\Actions\AnnulerRendezVousAction;
 
 $settings = require __DIR__ . '/settings.php';
 
@@ -15,6 +19,11 @@ return [
     'guzzle' => function(ContainerInterface $container) {
         return new GuzzleHttp\Client([
             'base_uri' => $container->get('toubelib.api')
+        ]);
+    },
+    'guzzle2' => function(ContainerInterface $container) {
+        return new GuzzleHttp\Client([
+            'base_uri' => $container->get('api.toubeelib-rdvs')
         ]);
     },
 
@@ -30,4 +39,24 @@ return [
     GenericGetCatalogAction::class => function(ContainerInterface $container) {
         return new GenericGetCatalogAction($container->get('guzzle'));
     },
+
+    CreerRendezVousAction::class => function(ContainerInterface $container) {
+        return new CreerRendezVousAction($container->get('guzzle2'));
+    },
+
+    ConsulterRendezVousAction::class => function(ContainerInterface $container) {
+        return new ConsulterRendezVousAction($container->get('guzzle2'));
+    },
+
+    ModifierOuGererCycleRendezVousAction::class => function(ContainerInterface $container) {
+        return new ModifierOuGererCycleRendezVousAction($container->get('guzzle2'));
+    },
+
+    AnnulerRendezVousAction::class => function(ContainerInterface $container) {
+        return new AnnulerRendezVousAction($container->get('guzzle2'));
+    },
+
+    
+
+
 ];
