@@ -37,5 +37,7 @@ return function (App $app): App {
 
     $app->get('/patients/{ID-PATIENT}/rdvs', GenericGetCatalogAction::class);
 
+    $app->post('/auth/signin', GenericGetCatalogAction::class);
+
     return $app;
 };

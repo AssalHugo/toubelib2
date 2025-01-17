@@ -7,3 +7,4 @@ app/vendor/
 app.rdv/vendor/
 gateway/vendor
 *.ini
+app.auth/vendor/
