@@ -1,16 +1,16 @@
 <?php
 
-namespace toubeelib\application\actions;
+namespace toubeelib_rdv\application\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator;
 use Slim\Exception\HttpBadRequestException;
-use toubeelib\application\renderer\JsonRenderer;
-use toubeelib\core\dto\IdRendezVousDTO;
-use toubeelib\core\services\rdv\ServiceRendezVousInterface;
-use toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException;
+use toubeelib_rdv\application\renderer\JsonRenderer;
+use toubeelib_rdv\core\dto\IdRendezVousDTO;
+use toubeelib_rdv\core\services\rdv\ServiceRendezVousInterface;
+use toubeelib_rdv\core\services\rdv\ServiceRendezVousInvalidDataException;
 
 class ConsulterRendezVousAction extends AbstractAction
 {

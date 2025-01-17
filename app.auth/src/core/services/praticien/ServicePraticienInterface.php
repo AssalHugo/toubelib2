@@ -1,11 +1,11 @@
 <?php
 
-namespace toubeelib\core\services\praticien;
+namespace toubeelib_auth\core\services\praticien;
 
-use toubeelib\core\dto\IdPraticienDTO;
-use toubeelib\core\dto\InputPraticienDTO;
-use toubeelib\core\dto\PraticienDTO;
-use toubeelib\core\dto\SpecialiteDTO;
+use toubeelib_auth\core\dto\IdPraticienDTO;
+use toubeelib_auth\core\dto\InputPraticienDTO;
+use toubeelib_auth\core\dto\PraticienDTO;
+use toubeelib_auth\core\dto\SpecialiteDTO;
 
 interface ServicePraticienInterface
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace toubeelib\application\actions;
+namespace toubeelib_rdv\application\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator as v;
 use Slim\Exception\HttpBadRequestException;
-use toubeelib\application\renderer\JsonRenderer;
-use toubeelib\core\dto\GererCycleRendezVousDTO;
-use toubeelib\core\services\rdv\ServiceRendezVousInterface;
+use toubeelib_rdv\application\renderer\JsonRenderer;
+use toubeelib_rdv\core\dto\GererCycleRendezVousDTO;
+use toubeelib_rdv\core\services\rdv\ServiceRendezVousInterface;
 
 class GererCycleRendezVousAction extends AbstractAction
 {

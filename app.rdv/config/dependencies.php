@@ -1,20 +1,20 @@
 <?php
 
 use Psr\Container\ContainerInterface;
-use toubeelib\application\actions\ConsulterRendezVousAction;
-use toubeelib\application\actions\SigninAction;
-use toubeelib\core\provider\AuthProvider;
-use toubeelib\core\repositoryInterfaces\PatientRepositoryInterface;
-use toubeelib\core\repositoryInterfaces\PraticienRepositoryInterface;
-use toubeelib\core\repositoryInterfaces\RendezVousRepositoryInterface;
-use toubeelib\core\services\auth\AuthService;
-use toubeelib\core\services\praticien\ServicePraticienInterface;
-use toubeelib\core\services\praticien\ServicePraticien;
-use toubeelib\core\services\rdv\ServiceRendezVous;
-use toubeelib\core\services\rdv\ServiceRendezVousInterface;
-use toubeelib\infrastructure\repositories\ArrayPatientRepository;
-use toubeelib\infrastructure\repositories\ArrayPraticienRepository;
-use toubeelib\infrastructure\repositories\ArrayRdvRepository;
+use toubeelib_rdv\application\actions\ConsulterRendezVousAction;
+use toubeelib_rdv\application\actions\SigninAction;
+use toubeelib_rdv\core\provider\AuthProvider;
+use toubeelib_rdv\core\repositoryInterfaces\PatientRepositoryInterface;
+use toubeelib_rdv\core\repositoryInterfaces\PraticienRepositoryInterface;
+use toubeelib_rdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
+use toubeelib_rdv\core\services\auth\AuthService;
+use toubeelib_rdv\core\services\praticien\ServicePraticienInterface;
+use toubeelib_rdv\core\services\praticien\ServicePraticien;
+use toubeelib_rdv\core\services\rdv\ServiceRendezVous;
+use toubeelib_rdv\core\services\rdv\ServiceRendezVousInterface;
+use toubeelib_rdv\infrastructure\repositories\ArrayPatientRepository;
+use toubeelib_rdv\infrastructure\repositories\ArrayPraticienRepository;
+use toubeelib_rdv\infrastructure\repositories\ArrayRdvRepository;
 
 return [
 
@@ -22,6 +22,14 @@ return [
 
     'rdv.pdo' => function (ContainerInterface $c) {
         $config = parse_ini_file(__DIR__ . '/rdv.db.ini');
+        $dsn = "{$config['driver']}:host={$config['host']};dbname={$config['database']}";
+        $user = $config['username'];
+        $password = $config['password'];
+        return new PDO($dsn, $user, $password);
+    },
+
+    'patient.pdo' => function (ContainerInterface $c) {
+        $config = parse_ini_file(__DIR__ . '/patient.db.ini');
         $dsn = "{$config['driver']}:host={$config['host']};dbname={$config['database']}";
         $user = $config['username'];
         $password = $config['password'];

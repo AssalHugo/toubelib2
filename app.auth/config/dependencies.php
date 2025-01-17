@@ -1,14 +1,14 @@
 <?php
 
 use Psr\Container\ContainerInterface;
-use toubeelib\application\actions\SigninAction;
-use toubeelib\core\provider\AuthProvider;
-use toubeelib\core\services\auth\AuthService;
+use toubeelib_auth\application\actions\SigninAction;
+use toubeelib_auth\core\provider\AuthProvider;
+use toubeelib_auth\core\services\auth\AuthService;
 
 return [
 
     'jwt.secret' => function () {
-        $config = parse_ini_file(__DIR__ . '/toto.env');
+        $config = parse_ini_file(__DIR__ . '/toubeelib.env');
         return $config['JWT_SECRET_KEY'];
     },
 

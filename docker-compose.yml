@@ -74,7 +74,7 @@ services:
     ports:
       - '6082:80'
     volumes:
-      - ./app:/var/php
+      - ./app.rdv:/var/php
     working_dir: /var/php
     networks:
       - toubeelib.net
@@ -91,7 +91,7 @@ services:
     ports:
       - '6083:80'
     volumes:
-      - ./app:/var/php
+      - ./app.auth:/var/php
     working_dir: /var/php
     networks:
       - toubeelib.net

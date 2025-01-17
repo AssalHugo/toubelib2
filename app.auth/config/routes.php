@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 use Slim\App;
-use toubeelib\application\actions\HomeAction;
-use toubeelib\application\actions\SigninAction;
+use toubeelib_auth\application\actions\HomeAction;
+use toubeelib_auth\application\actions\SigninAction;
 
 return function( App $app): App {
 

@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use toubeelib\core\dto\InputRendezVousDTO;
-use toubeelib\core\services\rdv\ServiceRendezVous;
-use toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException;
+use toubeelib_rdv\core\dto\InputRendezVousDTO;
+use toubeelib_rdv\core\services\rdv\ServiceRendezVous;
+use toubeelib_rdv\core\services\rdv\ServiceRendezVousInvalidDataException;
 
 
 $service = new ServiceRendezVous(new \toubeelib\infrastructure\repositories\ArrayRdvRepository());

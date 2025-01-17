@@ -1,11 +1,11 @@
 <?php
 
-namespace toubeelib\infrastructure\repositories;
+namespace toubeelib_auth\infrastructure\repositories;
 
 use PDO;
-use toubeelib\core\domain\entities\patient\Patient;
-use toubeelib\core\repositoryInterfaces\PatientRepositoryInterface;
-use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelib_auth\core\domain\entities\patient\Patient;
+use toubeelib_auth\core\repositoryInterfaces\PatientRepositoryInterface;
+use toubeelib_auth\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 use Ramsey\Uuid\Uuid;
 
 class ArrayPatientRepository implements PatientRepositoryInterface

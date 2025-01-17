@@ -1,8 +1,8 @@
 <?php
 
-namespace toubeelib\core\repositoryInterfaces;
+namespace toubeelib_rdv\core\repositoryInterfaces;
 
-use toubeelib\core\domain\entities\rendezvous\RendezVous;
+use toubeelib_rdv\core\domain\entities\rendezvous\RendezVous;
 
 interface RendezVousRepositoryInterface
 {

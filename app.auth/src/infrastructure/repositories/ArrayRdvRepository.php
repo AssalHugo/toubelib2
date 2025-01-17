@@ -1,13 +1,13 @@
 <?php
 
-namespace toubeelib\infrastructure\repositories;
+namespace toubeelib_auth\infrastructure\repositories;
 
 use PDO;
 use Ramsey\Uuid\Uuid;
-use toubeelib\core\domain\entities\praticien\Praticien;
-use toubeelib\core\domain\entities\rendezvous\RendezVous;
-use toubeelib\core\repositoryInterfaces\RendezVousRepositoryInterface;
-use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelib_auth\core\domain\entities\praticien\Praticien;
+use toubeelib_auth\core\domain\entities\rendezvous\RendezVous;
+use toubeelib_auth\core\repositoryInterfaces\RendezVousRepositoryInterface;
+use toubeelib_auth\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 
 class ArrayRdvRepository implements RendezVousRepositoryInterface
 {

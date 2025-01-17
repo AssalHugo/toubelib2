@@ -1,6 +1,6 @@
 <?php
 
-namespace toubeelib\application\middlewares;
+namespace toubeelib_auth\application\middlewares;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key; 
