@@ -2,17 +2,13 @@
 declare(strict_types=1);
 
 use Slim\App;
-use toubeelib\application\actions\ConsulterListePraticiensAction;
-use toubeelib\application\actions\ConsulterPlanningPraticienAction;
-use toubeelib\application\actions\ConsulterPraticienAction;
-use toubeelib\application\actions\ListerDispoPraticienAction;
-use toubeelib\application\actions\ListerRendezVousPatientAction;
-use toubeelib\application\actions\ModifierOuGererCycleRendezVousAction;
-use toubeelib\application\actions\AnnulerRendezVousAction;
-use toubeelib\application\actions\ConsulterRendezVousAction;
-use toubeelib\application\actions\CreerRendezVousAction;
-use toubeelib\application\actions\HomeAction;
-use toubeelib\application\actions\SigninAction;
+use toubeelibRdv\application\actions\ListerRendezVousPatientAction;
+use toubeelibRdv\application\actions\ModifierOuGererCycleRendezVousAction;
+use toubeelibRdv\application\actions\AnnulerRendezVousAction;
+use toubeelibRdv\application\actions\ConsulterRendezVousAction;
+use toubeelibRdv\application\actions\CreerRendezVousAction;
+use toubeelibRdv\application\actions\HomeAction;
+use toubeelibRdv\application\actions\SigninAction;
 
 return function( App $app): App {
 

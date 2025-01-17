@@ -1,14 +1,14 @@
 <?php
 
-namespace toubeelib\application\actions;
+namespace toubeelibRdv\application\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Validator;
 use Slim\Exception\HttpBadRequestException;
-use toubeelib\application\renderer\JsonRenderer;
-use toubeelib\core\services\rdv\ServiceRendezVousInterface;
-use toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException;
+use toubeelibRdv\application\renderer\JsonRenderer;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException;
 
 class AnnulerRendezVousAction extends AbstractAction
 {

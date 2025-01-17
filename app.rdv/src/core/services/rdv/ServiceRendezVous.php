@@ -1,26 +1,26 @@
 <?php
 
-namespace toubeelib\core\services\rdv;
+namespace toubeelibRdv\core\services\rdv;
 
 use Respect\Validation\Validator;
-use toubeelib\core\domain\entities\rendezvous\RendezVous;
-use toubeelib\core\dto\CreneauRendezVousDTO;
-use toubeelib\core\dto\GererCycleRendezVousDTO;
-use toubeelib\core\dto\IdPatientDTO;
-use toubeelib\core\dto\IdRendezVousDTO;
-use toubeelib\core\dto\InputDispoPraticienDTO;
-use toubeelib\core\dto\InputRendezVousDTO;
-use toubeelib\core\dto\ModificationRendezVousDTO;
-use toubeelib\core\dto\PlanningPraticienDTO;
-use toubeelib\core\dto\RendezVousDTO;
-use toubeelib\core\repositoryInterfaces\PraticienRepositoryInterface;
-use toubeelib\core\repositoryInterfaces\RendezVousRepositoryInterface;
-use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelibRdv\core\domain\entities\rendezvous\RendezVous;
+use toubeelibRdv\core\dto\CreneauRendezVousDTO;
+use toubeelibRdv\core\dto\GererCycleRendezVousDTO;
+use toubeelibRdv\core\dto\IdPatientDTO;
+use toubeelibRdv\core\dto\IdRendezVousDTO;
+use toubeelibRdv\core\dto\InputDispoPraticienDTO;
+use toubeelibRdv\core\dto\InputRendezVousDTO;
+use toubeelibRdv\core\dto\ModificationRendezVousDTO;
+use toubeelibRdv\core\dto\PlanningPraticienDTO;
+use toubeelibRdv\core\dto\RendezVousDTO;
+use toubeelibRdv\core\repositoryInterfaces\PraticienRepositoryInterface;
+use toubeelibRdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
+use toubeelibRdv\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use toubeelib\core\services\rdv\ServiceRendezVousInterface;
-use toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException;
 
 
 class ServiceRendezVous implements ServiceRendezVousInterface

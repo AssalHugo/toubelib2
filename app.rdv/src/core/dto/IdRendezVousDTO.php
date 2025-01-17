@@ -1,6 +1,6 @@
 <?php
 
-namespace toubeelib\core\dto;
+namespace toubeelibRdv\core\dto;
 
 class IdRendezVousDTO extends DTO
 {
