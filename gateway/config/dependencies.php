@@ -35,13 +35,19 @@ return [
         ]);
     },
 
+    'guzzlePraticiens' => function(ContainerInterface $container) {
+        return new GuzzleHttp\Client([
+            'base_uri' => $container->get('toubelibPraticien.api')
+        ]);
+    },
+
     //On définit la dépendance ListePraticiensAction
     ListePraticiensAction::class => function(ContainerInterface $container) {
-        return new ListePraticiensAction($container->get('guzzle'));
+        return new GenericGetCatalogAction($container->get('guzzlePraticiens'));
     },
 
     PraticienAction::class => function(ContainerInterface $container) {
-        return new PraticienAction($container->get('guzzle'));
+        return new GenericGetCatalogAction($container->get('guzzlePraticiens'));
     },
 
     GenericGetCatalogAction::class => function(ContainerInterface $container) {
@@ -64,7 +70,7 @@ return [
         return new AnnulerRendezVousAction($container->get('guzzle2'));
     },
 
-   
+
     SigninAction::class => function (ContainerInterface $container) {
         return new SigninAction($container->get('guzzle3'));
     },
