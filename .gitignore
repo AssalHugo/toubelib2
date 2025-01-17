@@ -7,3 +7,4 @@ app/vendor/
 gateway/vendor
 *.ini
 app-praticiens/vendor/
+app.rdv/vendor/
