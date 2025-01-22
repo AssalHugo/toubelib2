@@ -11,3 +11,6 @@
 [2024-10-21T16:26:41.854960+00:00] my_logger.INFO: Modification de rendez-vous bien enregistrée {"id":"7j8k9l0m-1121-3141-5161-9201n3o4p5q6","specialitee":"3f4g5h6i-7890-1121-3141-5161j8k9l0m1","idPatient":"3c4d5e6f-7890-1121-3141-5161c7d8e9f0"} []
 [2024-10-21T18:03:44.257887+00:00] my_logger.INFO: Modification de rendez-vous bien enregistrée {"id":"7j8k9l0m-1121-3141-5161-9201n3o4p5q6","specialitee":"3f4g5h6i-7890-1121-3141-5161j8k9l0m1","idPatient":"3c4d5e6f-7890-1121-3141-5161c7d8e9f0"} []
 [2025-01-15T15:29:31.125014+00:00] my_logger.ERROR: Modification de rendez-vous échouée {"error":"Patient 3c4d5e6f-7890-1121-3141-5161c7d8e9f0 not found"} []
+[2025-01-22T14:32:30.113438+00:00] my_logger.ERROR: Modification de rendez-vous échouée {"error":"Patient 3c4d5e6f-7890-1121-3141-5161c7d8e9f0 not found"} []
+[2025-01-22T14:35:37.489022+00:00] my_logger.ERROR: Modification de rendez-vous échouée {"error":"Patient 3c4d5e6f-7890-1121-3141-5161c7d8e9f0 not found"} []
+[2025-01-22T14:43:08.774281+00:00] my_logger.ERROR: Modification de rendez-vous échouée {"error":"Patient 3c4d5e6f-7890-1121-3141-5161c7d8e9f0 not found"} []

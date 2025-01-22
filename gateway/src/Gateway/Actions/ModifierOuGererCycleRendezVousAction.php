@@ -18,7 +18,9 @@ class ModifierOuGererCycleRendezVousAction extends AbstractAction
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
         try {
-            return $this->remote->patch('rdvs/' . $args['ID-RDV']);
+            $body = $rq->getParsedBody();
+            return $this->remote->patch('rdvs/' . $args['ID-RDV'],
+        ['json'=> $body] );
         }
         catch (ClientException $e) {
             match ($e->getCode()) {

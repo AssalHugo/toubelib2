@@ -11,6 +11,7 @@ use Gateway\Actions\ModifierOuGererCycleRendezVousAction;
 use Gateway\Actions\AnnulerRendezVousAction;
 
 
+
 $settings = require __DIR__ . '/settings.php';
 
 return [

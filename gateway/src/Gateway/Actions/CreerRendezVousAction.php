@@ -17,7 +17,8 @@ class CreerRendezVousAction extends AbstractAction
 
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
-        try {            
+        try {   
+                     
             $body = $rq->getParsedBody(); 
             if (empty($body)) {
                 throw new HttpInternalServerErrorException($rq, "Le corps de la requête est vide.");
