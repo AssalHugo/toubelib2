@@ -4,6 +4,7 @@ use Gateway\Actions\ExampleAction;
 use Gateway\Actions\GenericGetCatalogAction;
 use Gateway\Actions\ListePraticiensAction;
 use Gateway\Actions\PraticienAction;
+use Gateway\Actions\SigninAction;
 use Slim\App;
 use Gateway\middlewares\AddHeaders;
 
@@ -26,6 +27,10 @@ return function (App $app): App {
 
     $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class)
         ->add(new AddHeaders);
+    
+    $app->post('/auth/signin', SigninAction::class)
+        ->add(new AddHeaders);
+
 
     $app->post('/rdvs', GenericGetCatalogAction::class);
 
