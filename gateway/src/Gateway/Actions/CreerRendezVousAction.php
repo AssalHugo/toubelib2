@@ -17,8 +17,14 @@ class CreerRendezVousAction extends AbstractAction
 
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
-        try {
-            return $this->remote->post('rdvs' . $args['ID-RDV']);
+        try {            
+            $body = $rq->getParsedBody(); 
+            if (empty($body)) {
+                throw new HttpInternalServerErrorException($rq, "Le corps de la requête est vide.");
+            }            
+            return $this->remote->post('/rdvs' , [
+                'json' => $body
+            ]);
         }
         catch (ClientException $e) {
             match ($e->getCode()) {

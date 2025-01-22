@@ -49,7 +49,7 @@ return [
     },
 
     CreerRendezVousAction::class => function(ContainerInterface $container) {
-        return new CreerRendezVousAction($container->get('guzzle2'));
+        return new CreerRendezVousAction($container->post('guzzle2'));
     },
 
     ConsulterRendezVousAction::class => function(ContainerInterface $container) {

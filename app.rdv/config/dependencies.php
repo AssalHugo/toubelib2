@@ -36,6 +36,15 @@ return [
         return new PDO($dsn, $user, $password);
     },
 
+    
+    'praticien.pdo' => function (ContainerInterface $c) {
+        $config = parse_ini_file(__DIR__ . '/praticien.db.ini');
+        $dsn = "{$config['driver']}:host={$config['host']};dbname={$config['database']}";
+        $user = $config['username'];
+        $password = $config['password'];
+        return new PDO($dsn, $user, $password);
+    },
+
 
     ConsulterRendezVousAction::class => function (ContainerInterface $c) {
         return new ConsulterRendezVousAction($c->get(ServiceRendezVousInterface::class));
