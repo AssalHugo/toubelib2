@@ -19,6 +19,7 @@ class AuthService
     public function verifyCredentials(string $email, string $password): AuthDTO
     {
         $user = $this->userRepository->findByEmail($email);
+        
 
         if (!$user || !password_verify($password, $user->getPassword())) {
             throw new InvalidArgumentException('Invalid credentials');
