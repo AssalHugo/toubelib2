@@ -3,6 +3,7 @@
 use Gateway\Actions\GenericGetCatalogAction;
 use Gateway\Actions\ListePraticiensAction;
 use Gateway\Actions\PraticienAction;
+use Gateway\Actions\SigninAction;
 use Psr\Container\ContainerInterface;
 
 $settings = require __DIR__ . '/settings.php';
@@ -30,4 +31,7 @@ return [
     GenericGetCatalogAction::class => function(ContainerInterface $container) {
         return new GenericGetCatalogAction($container->get('guzzle'));
     },
+    SigninAction::class => function(ContainerInterface $container) {
+        return new SigninAction($container->get('guzzle'));
+    }
 ];
