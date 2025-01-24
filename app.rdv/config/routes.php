@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 use Slim\App;
 use toubeelibRdv\application\actions\ListerDispoPraticienAction;
-use toubeelibRdv\application\actions\ListerRendezVousPatientAction;
-use toubeelibRdv\application\actions\ModifierOuGererCycleRendezVousAction;
-use toubeelibRdv\application\actions\AnnulerRendezVousAction;
 use toubeelibRdv\application\actions\ConsulterRendezVousAction;
 use toubeelibRdv\application\actions\CreerRendezVousAction;
 use toubeelibRdv\application\actions\HomeAction;
