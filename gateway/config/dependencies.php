@@ -9,6 +9,8 @@ use Gateway\Actions\CreerRendezVousAction;
 use Gateway\Actions\ConsulterRendezVousAction;
 use Gateway\Actions\ModifierOuGererCycleRendezVousAction;
 use Gateway\Actions\AnnulerRendezVousAction;
+use Gateway\Actions\ValidateAction;
+
 
 
 
@@ -50,7 +52,7 @@ return [
     },
 
     CreerRendezVousAction::class => function(ContainerInterface $container) {
-        return new CreerRendezVousAction($container->post('guzzle2'));
+        return new CreerRendezVousAction($container->get('guzzle2'));
     },
 
     ConsulterRendezVousAction::class => function(ContainerInterface $container) {
@@ -70,5 +72,8 @@ return [
         return new SigninAction($container->get('guzzle3'));
     },
 
+    ValidateAction::class => function (ContainerInterface $container) {
+        return new ValidateAction($container->get('guzzle3'));
+    },
 
 ];

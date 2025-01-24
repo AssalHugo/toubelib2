@@ -12,30 +12,16 @@ use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpUnauthorizedException;
 
-class GenericGetCatalogAction extends AbstractAction
+class ValidateAction extends AbstractAction
 {
+
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
-        $method = $rq->getMethod();
-        $path = $rq->getUri()->getPath();
-        $options = ['query' => $rq->getQueryParams()];
-        
-
-        if ($method === 'POST' || $method === 'PUT' || $method === 'PATCH') {
-            $options['json'] = $rq->getParsedBody();
+        try {            
+            return $this->remote->post('/auth/validate');
         }
-
-        $auth = $rq->getHeader('Authorization') ?? null;
-
-        if (!empty($auth)) {
-            $options['headers'] = ['Authorization' => $auth];                        
-        }
-
-        try {                    
-            return $this->remote->request($method, $path, $options);
-            
-        }catch (ClientException $e) {
-            match ($e->getCode()) {
+        catch (ClientException $e) {            
+            match ($e->getCode()) {                
                 400, 404 => throw new HttpNotFoundException($rq, "Ressource non trouvée"),
                 401 => throw new HttpUnauthorizedException($rq, "Non autorisé"),
                 403 => throw new HttpForbiddenException($rq, "Accès refusé"),
