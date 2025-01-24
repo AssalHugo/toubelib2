@@ -25,13 +25,17 @@ class PraticienServiceAdaptateur implements PraticienServiceInterface
     {
 
         try {
-            return $this->client->get('praticiens/' . $id);
+            $praticienResponse = $this->client->get('praticiens/' . $id);
+
+            $praticien = json_decode($praticienResponse->getBody()->getContents());
+
+            return PraticienDTO::createFromStdClass($praticien);
         }
         catch (ClientException $e) {
             throw new \Exception('Erreur lors de la récupération du praticien');
         }
         catch (ConnectException $e) {
-            throw new \Exception('Erreur lors de la connexion au serveur');
+            throw new \Exception('Erreur lors de la connexion au serveur'. $e->getMessage());
         }
         catch (ServerException $e) {
             throw new \Exception('Erreur serveur');
@@ -41,16 +45,21 @@ class PraticienServiceAdaptateur implements PraticienServiceInterface
     public function getSpecialiteById(string $id): SpecialiteDTO
     {
         try {
-            return $this->client->get('specialites/' . $id);
+            $specialiteResponse = $this->client->get('specialites/' . $id);
+
+            $specialite = json_decode($specialiteResponse->getBody()->getContents());
+
+            return new SpecialiteDTO($specialite->specialite->ID, $specialite->specialite->label, $specialite->specialite->description);
+
         }
         catch (ClientException $e) {
-            throw new \Exception('Erreur lors de la récupération de la spécialité');
+            throw new \Exception('Erreur lors de la récupération de la spécialité' . $e->getMessage());
         }
         catch (ConnectException $e) {
             throw new \Exception('Erreur lors de la connexion au serveur');
         }
         catch (ServerException $e) {
-            throw new \Exception('Erreur serveur');
+            throw new \Exception('Erreur serveur' . $e->getMessage());
         }
     }
 }

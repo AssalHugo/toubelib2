@@ -2,6 +2,7 @@
 
 use Gateway\Actions\GenericGetCatalogAction;
 use Gateway\Actions\ListePraticiensAction;
+use Gateway\Actions\ListerDispoPraticienAction;
 use Gateway\Actions\PraticienAction;
 use Gateway\Actions\SigninAction;
 use Psr\Container\ContainerInterface;
@@ -64,7 +65,11 @@ return [
         return new AnnulerRendezVousAction($container->get('guzzle2'));
     },
 
-   
+    ListerDispoPraticienAction::class => function(ContainerInterface $container) {
+        return new ListerDispoPraticienAction($container->get('guzzle2'));
+    },
+
+
     SigninAction::class => function (ContainerInterface $container) {
         return new SigninAction($container->get('guzzle3'));
     },

@@ -28,6 +28,7 @@ class ConsulterRendezVousAction extends AbstractAction
 
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
+
         //On essaye de récupérer l'id donné en paramètre
         $id = $args['ID-RDV'] ?? null;
 
