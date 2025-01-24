@@ -2,6 +2,7 @@
 
 use Psr\Container\ContainerInterface;
 use toubeelib_auth\application\actions\SigninAction;
+use toubeelib_auth\application\actions\ValidateAction;
 use toubeelib_auth\core\provider\AuthProvider;
 use toubeelib_auth\core\services\auth\AuthService;
 use toubeelib_auth\core\repositoryInterfaces\PatientRepositoryInterface;
@@ -23,6 +24,10 @@ return [
     },
     PatientRepositoryInterface::class => function (ContainerInterface $c) {
         return new ArrayPatientRepository($c->get('patient.pdo'));
+    },
+    ValidateAction::class => function (ContainerInterface $c) {
+        return new ValidateAction($c->get('jwt.secret'));
+    
     },
 
     'patient.pdo' => function (ContainerInterface $c) {
