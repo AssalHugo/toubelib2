@@ -205,14 +205,6 @@ class ArrayRdvRepository implements RendezVousRepositoryInterface
 
     public function listerDispoPraticien(string $praticienId, \DateTimeImmutable $start, \DateTimeImmutable $end): array
     {
-        // Retrieve the Praticien entity
-        $stmt = $this->praticienDb->prepare('SELECT * FROM praticien WHERE id = :id');
-        $stmt->execute([':id' => $praticienId]);
-        $praticienData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$praticienData) {
-            throw new RepositoryEntityNotFoundException("Praticien $praticienId not found");
-        }
 
         $joursConsultation = Praticien::JOURS_CONSULTATION;
         $horairesConsultation = Praticien::HORAIRES_CONSULTATION;
