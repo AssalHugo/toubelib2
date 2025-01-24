@@ -12,16 +12,9 @@ use toubeelibRdv\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 class ArrayRdvRepository implements RendezVousRepositoryInterface
 {
     private PDO $rdvDb;
-
-    private PDO $patientDb;
-
-    private PDO $praticienDb;
-
-    public function __construct(PDO $rdvDb, PDO $patientDb, PDO $praticienDb)
+    public function __construct(PDO $rdvDb)
     {
         $this->rdvDb = $rdvDb;
-        $this->patientDb = $patientDb;
-        $this->praticienDb = $praticienDb;
     }
 
     public function save(RendezVous $rendezVous): string

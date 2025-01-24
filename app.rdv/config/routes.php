@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Slim\App;
+use toubeelibRdv\application\actions\ListerDispoPraticienAction;
 use toubeelibRdv\application\actions\ListerRendezVousPatientAction;
 use toubeelibRdv\application\actions\ModifierOuGererCycleRendezVousAction;
 use toubeelibRdv\application\actions\AnnulerRendezVousAction;
@@ -20,11 +21,12 @@ return function( App $app): App {
 
     $app->get('/rdvs/{ID-RDV}', ConsulterRendezVousAction::class);
 
-    $app->patch('/rdvs/{ID-RDV}', ModifierOuGererCycleRendezVousAction::class);
+    //$app->patch('/rdvs/{ID-RDV}', ModifierOuGererCycleRendezVousAction::class);
+    $app->get('/praticiens/{ID-PRATICIEN}/disponibilites', ListerDispoPraticienAction::class);
 
-    $app->delete('/rdvs/{ID-RDV}', AnnulerRendezVousAction::class);
+    //$app->delete('/rdvs/{ID-RDV}', AnnulerRendezVousAction::class);
 
-    $app->get('/patients/{ID-PATIENT}/rdvs', ListerRendezVousPatientAction::class);
+    //$app->get('/patients/{ID-PATIENT}/rdvs', ListerRendezVousPatientAction::class);
 
     return $app;
 };
