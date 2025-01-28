@@ -12,6 +12,8 @@ use toubeelibRdv\core\services\rdv\ServiceRendezVous;
 use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
 use toubeelibRdv\infrastructure\adaptateur\PraticienServiceAdaptateur;
 use toubeelibRdv\infrastructure\repositories\ArrayRdvRepository;
+use PhpAmqpLib\Message\AMQPMessage;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 return [
 
@@ -27,6 +29,18 @@ return [
         return new GuzzleHttp\Client([
             'base_uri' => $container->get('toubelibPraticien.api')
         ]);
+    },
+
+    'rabbitmq' => function(ContainerInterface $container){
+        $exchange_name = 'testExanges';
+        $queue_name = 'testqueues';
+        $routing_key = 'routing';
+        $connection = new AMQPStreamConnection('rabbitmq',5672, 'admin', 'admin');
+        $channel = $connection->channel();
+        $channel->exchange_declare($exchange_name, 'direct', false, true, false);
+        $channel->queue_declare($queue_name, false, true, false, false);
+        $channel->queue_bind($queue_name, $exchange_name, $routing_key);
+
     },
 
 
