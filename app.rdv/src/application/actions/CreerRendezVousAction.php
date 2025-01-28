@@ -110,8 +110,8 @@ class CreerRendezVousAction extends AbstractAction
                 'rdv' => [
                     'id' => $rdv->ID,
                     'creneau' => $rdv->creneau,
-                    'specialite' => $rdv->specialite,
-                    'idPraticien' => $rdv->idPraticien,
+                    'specialitee' => $rdv->specialitee,
+                    'idPraticien' => $rdv->praticien,
                     'idPatient' => $rdv->idPatient
                 ]
             ];
