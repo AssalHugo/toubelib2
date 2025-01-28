@@ -1,8 +1,8 @@
 <?php
 
-namespace toubeelib\core\repositoryInterfaces;
+namespace toubeelib_auth\core\repositoryInterfaces;
 
-use toubeelib\core\domain\entities\patient\Patient;
+use toubeelib_auth\core\domain\entities\patient\Patient;
 
 interface PatientRepositoryInterface
 {

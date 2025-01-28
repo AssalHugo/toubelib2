@@ -1,17 +1,17 @@
 <?php
 
-namespace toubeelib_auth\core\services\praticien;
+namespace toubeelib_rdv\core\services\praticien;
 
 use Respect\Validation\Exceptions\NestedValidationException;
-use toubeelib_auth\core\domain\entities\praticien\Praticien;
-use toubeelib_auth\core\dto\IdPraticienDTO;
-use toubeelib_auth\core\dto\InputPraticienDTO;
-use toubeelib_auth\core\dto\PraticienDTO;
-use toubeelib_auth\core\dto\SpecialiteDTO;
-use toubeelib_auth\core\repositoryInterfaces\PraticienRepositoryInterface;
-use toubeelib_auth\core\repositoryInterfaces\RepositoryEntityNotFoundException;
-use toubeelib_auth\core\services\praticien\ServicePraticienInterface;
-use toubeelib_auth\core\services\praticien\ServicePraticienInvalidDataException;
+use toubeelib_rdv\core\domain\entities\praticien\Praticien;
+use toubeelib_rdv\core\dto\IdPraticienDTO;
+use toubeelib_rdv\core\dto\InputPraticienDTO;
+use toubeelib_rdv\core\dto\PraticienDTO;
+use toubeelib_rdv\core\dto\SpecialiteDTO;
+use toubeelib_rdv\core\repositoryInterfaces\PraticienRepositoryInterface;
+use toubeelib_rdv\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelib_rdv\core\services\praticien\ServicePraticienInterface;
+use toubeelib_rdv\core\services\praticien\ServicePraticienInvalidDataException;
 
 class ServicePraticien implements ServicePraticienInterface
 {

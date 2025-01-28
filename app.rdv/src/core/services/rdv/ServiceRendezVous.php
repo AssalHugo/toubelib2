@@ -6,19 +6,18 @@ use Respect\Validation\Validator;
 use toubeelibRdv\core\domain\entities\rendezvous\RendezVous;
 use toubeelibRdv\core\dto\CreneauRendezVousDTO;
 use toubeelibRdv\core\dto\GererCycleRendezVousDTO;
-use toubeelibRdv\core\dto\IdPatientDTO;
 use toubeelibRdv\core\dto\IdRendezVousDTO;
 use toubeelibRdv\core\dto\InputDispoPraticienDTO;
 use toubeelibRdv\core\dto\InputRendezVousDTO;
 use toubeelibRdv\core\dto\ModificationRendezVousDTO;
 use toubeelibRdv\core\dto\PlanningPraticienDTO;
 use toubeelibRdv\core\dto\RendezVousDTO;
-use toubeelibRdv\core\repositoryInterfaces\PraticienRepositoryInterface;
 use toubeelibRdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
 use toubeelibRdv\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use toubeelibRdv\core\services\praticien\PraticienServiceInterface;
 use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
 use toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException;
 
@@ -27,11 +26,11 @@ class ServiceRendezVous implements ServiceRendezVousInterface
 {
 
     private RendezVousRepositoryInterface $rendezVousRepository;
-    private PraticienRepositoryInterface $praticienRepository;
+    private PraticienServiceInterface $praticienRepository;
 
     private $logger;
 
-    public function __construct(RendezVousRepositoryInterface $rendezVousRepository, PraticienRepositoryInterface $praticienRepository)
+    public function __construct(RendezVousRepositoryInterface $rendezVousRepository, PraticienServiceInterface $praticienRepository)
     {
         $this->rendezVousRepository = $rendezVousRepository;
         $this->praticienRepository = $praticienRepository;
@@ -117,15 +116,18 @@ class ServiceRendezVous implements ServiceRendezVousInterface
         }
 
         // Récupérer le praticien
-        $le_praticien = $this->praticienRepository->getPraticienById($r->praticien);
-        if (!$le_praticien) {
+        try {
+            $praticienDTO = $this->praticienRepository->getPraticienById($r->praticien);
+        } catch (RepositoryEntityNotFoundException $e) {
             throw new ServiceRendezVousInvalidDataException('Praticien non trouvé');
         }
 
+
         // Vérifier la spécialité
-        $la_specialitee = $this->praticienRepository->getSpecialiteById($le_praticien->specialitee->getID());
-        if (!$la_specialitee) {
-            throw new ServiceRendezVousInvalidDataException('Spécialité non valide');
+        try {
+            $specialiteDTO = $this->praticienRepository->getSpecialiteById($r->specialitee);
+        } catch (RepositoryEntityNotFoundException $e) {
+            throw new ServiceRendezVousInvalidDataException('Spécialité non trouvée');
         }
 
         // Vérification de la disponibilité du créneau

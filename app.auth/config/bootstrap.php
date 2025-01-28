@@ -2,7 +2,7 @@
 
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
-//use toubeelib\application\middlewares\AddHeaders;
+//use toubeelib_auth\application\middlewares\AddHeaders;
 
 
 

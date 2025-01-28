@@ -2,6 +2,7 @@
 
 use Gateway\Actions\GenericGetCatalogAction;
 use Gateway\Actions\ListePraticiensAction;
+use Gateway\Actions\ListerDispoPraticienAction;
 use Gateway\Actions\PraticienAction;
 use Gateway\Actions\SigninAction;
 use Psr\Container\ContainerInterface;
@@ -9,6 +10,9 @@ use Gateway\Actions\CreerRendezVousAction;
 use Gateway\Actions\ConsulterRendezVousAction;
 use Gateway\Actions\ModifierOuGererCycleRendezVousAction;
 use Gateway\Actions\AnnulerRendezVousAction;
+use Gateway\Actions\ValidateAction;
+
+
 
 
 $settings = require __DIR__ . '/settings.php';
@@ -32,6 +36,12 @@ return [
     'guzzle3' => function(ContainerInterface $container) {
         return new GuzzleHttp\Client([
             'base_uri' => $container->get('api.toubeelib-auth')
+        ]);
+    },
+
+    'guzzlePraticiens' => function(ContainerInterface $container) {
+        return new GuzzleHttp\Client([
+            'base_uri' => $container->get('toubelibPraticien.api')
         ]);
     },
 
@@ -64,10 +74,17 @@ return [
         return new AnnulerRendezVousAction($container->get('guzzle2'));
     },
 
-   
+    ListerDispoPraticienAction::class => function(ContainerInterface $container) {
+        return new ListerDispoPraticienAction($container->get('guzzle2'));
+    },
+
+
     SigninAction::class => function (ContainerInterface $container) {
         return new SigninAction($container->get('guzzle3'));
     },
 
+    ValidateAction::class => function (ContainerInterface $container) {
+        return new ValidateAction($container->get('guzzle3'));
+    },
 
 ];

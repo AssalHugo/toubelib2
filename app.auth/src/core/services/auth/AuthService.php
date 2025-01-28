@@ -1,11 +1,11 @@
 <?php
 
-namespace toubeelib\core\services\auth;
+namespace toubeelib_auth\core\services\auth;
 
-use toubeelib\core\repositoryInterfaces\PatientRepositoryInterface;
-use toubeelib\core\dto\AuthDTO;
+use toubeelib_auth\core\repositoryInterfaces\PatientRepositoryInterface;
+use toubeelib_auth\core\dto\AuthDTO;
 use InvalidArgumentException;
-use toubeelib\core\domain\entities\patient\Patient;
+use toubeelib_auth\core\domain\entities\patient\Patient;
 
 class AuthService
 {
@@ -19,6 +19,7 @@ class AuthService
     public function verifyCredentials(string $email, string $password): AuthDTO
     {
         $user = $this->userRepository->findByEmail($email);
+        
 
         if (!$user || !password_verify($password, $user->getPassword())) {
             throw new InvalidArgumentException('Invalid credentials');

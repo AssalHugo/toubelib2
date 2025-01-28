@@ -23,10 +23,17 @@ La fonctionnalité "Contrôle d’autorisation pour accéder à un praticien" n'
  routes :
  POST
     /auth/signin
+    
     ## body 
     {
         "email": "utilisateur@example.com",
         "password": "totot"
+    }
+
+    ## body 2
+     {
+        "email": "test@example.com",
+        "password": "password123"
     }
 
 POST

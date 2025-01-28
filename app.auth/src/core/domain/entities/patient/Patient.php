@@ -1,7 +1,7 @@
 <?php
 
-namespace toubeelib\core\domain\entities\patient;
-use toubeelib\core\domain\entities\Entity;
+namespace toubeelib_auth\core\domain\entities\patient;
+use toubeelib_auth\core\domain\entities\Entity;
 
 class Patient extends Entity
 {

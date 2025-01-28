@@ -4,7 +4,6 @@ use Psr\Container\ContainerInterface;
 use toubeelibRdv\application\actions\ConsulterRendezVousAction;
 use toubeelibRdv\application\actions\SigninAction;
 use toubeelibRdv\core\provider\AuthProvider;
-use toubeelibRdv\core\repositoryInterfaces\PraticienRepositoryInterface;
 use toubeelibRdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
 use toubeelibRdv\core\services\auth\AuthService;
 use toubeelibRdv\core\services\praticien\PraticienServiceInterface;
@@ -52,7 +51,7 @@ return [
     },
 
     RendezVousRepositoryInterface::class => function (ContainerInterface $c) {
-        return new ArrayRdvRepository($c->get('rdv.pdo'), $c->get('patient.pdo'), $c->get('praticien.pdo'));
+        return new ArrayRdvRepository($c->get('rdv.pdo'));
     },
 
     PraticienServiceInterface::class => function (ContainerInterface $c) {

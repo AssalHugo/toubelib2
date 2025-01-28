@@ -1,17 +1,18 @@
 <?php
 
-namespace toubeelib_auth\application\middlewares;
+namespace toubeelib_auth\application\actions;
 
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Exception\HttpException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key; 
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Exception\HttpException;
-use Slim\Psr7\Response as SlimResponse;
 
-class AuthMiddleware
+
+class ValidateAction
 {
+    
     private string $jwtSecret;
 
     public function __construct(string $jwtSecret)
@@ -19,10 +20,10 @@ class AuthMiddleware
         $this->jwtSecret = $jwtSecret;
     }
 
-    public function __invoke(Request $request, RequestHandler $handler): Response
+   public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $authHeader = $request->getHeader('Authorization');
-        
+
         if (!$authHeader || empty($authHeader[0])) {
             throw new HttpException($request, "header invalide", 401);
         }
@@ -31,13 +32,10 @@ class AuthMiddleware
 
         try {
             $decoded = JWT::decode($token, new Key($this->jwtSecret, 'HS256'));
-
             $request = $request->withAttribute('auth', $decoded);
-
+            return $response->withStatus(200)->withJson(['message' => 'Token is valid']);
         } catch (\Exception $e) {
             throw new HttpException($request, "Invalid token", 401);
         }
-
-        return $handler->handle($request);
     }
 }

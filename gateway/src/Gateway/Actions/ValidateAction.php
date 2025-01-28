@@ -12,18 +12,16 @@ use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpUnauthorizedException;
 
-class ModifierOuGererCycleRendezVousAction extends AbstractAction
+class ValidateAction extends AbstractAction
 {
 
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
-        try {
-            $body = $rq->getParsedBody();
-            return $this->remote->patch('rdvs/' . $args['ID-RDV'],
-        ['json'=> $body] );
+        try {            
+            return $this->remote->post('/auth/validate');
         }
-        catch (ClientException $e) {
-            match ($e->getCode()) {
+        catch (ClientException $e) {            
+            match ($e->getCode()) {                
                 400, 404 => throw new HttpNotFoundException($rq, "Ressource non trouvée"),
                 401 => throw new HttpUnauthorizedException($rq, "Non autorisé"),
                 403 => throw new HttpForbiddenException($rq, "Accès refusé"),

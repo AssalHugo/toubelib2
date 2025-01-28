@@ -1,13 +1,13 @@
 <?php
 
-namespace toubeelib_auth\infrastructure\repositories;
+namespace toubeelib_rdv\infrastructure\repositories;
 
 use PDO;
 use Ramsey\Uuid\Uuid;
-use toubeelib_auth\core\domain\entities\praticien\Praticien;
-use toubeelib_auth\core\domain\entities\praticien\Specialite;
-use toubeelib_auth\core\repositoryInterfaces\PraticienRepositoryInterface;
-use toubeelib_auth\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelib_rdv\core\domain\entities\praticien\Praticien;
+use toubeelib_rdv\core\domain\entities\praticien\Specialite;
+use toubeelib_rdv\core\repositoryInterfaces\PraticienRepositoryInterface;
+use toubeelib_rdv\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 
 class ArrayPraticienRepository implements PraticienRepositoryInterface
 {
