@@ -35,6 +35,8 @@ class SigninAction
             'refreshToken' => $authDTO->getRefreshToken()
         ];
 
+        header('Authorization: ' . 'Bearer '.$responseBody['accessToken']);
+
         $response->getBody()->write(json_encode($responseBody));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
     }

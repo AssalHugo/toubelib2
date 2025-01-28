@@ -37,5 +37,5 @@ class ValidateAction
         } catch (\Exception $e) {
             throw new HttpException($request, "Invalid token", 401);
         }
-    }
+    }   
 }

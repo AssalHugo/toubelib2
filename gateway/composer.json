@@ -1,6 +1,7 @@
 {
     "require": {
         "slim/slim": "^4.0",
+        "slim/psr7": "^1.7",
         "nyholm/psr7": "^1.5",
         "php-di/php-di": "^6.0",
         "nyholm/psr7-server": "^1.1",

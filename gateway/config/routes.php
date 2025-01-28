@@ -10,6 +10,7 @@ use Gateway\Actions\PraticienAction;
 use Slim\App;
 use Gateway\middlewares\AddHeaders;
 use Gateway\Actions\GenericGetCatalogAction00;
+use Gateway\middlewares\AuthnMiddleware;
 
 
 return function (App $app): App {
@@ -18,18 +19,30 @@ return function (App $app): App {
 
     $app->get('/praticiens', ListePraticiensAction::class);
 
-    $app->get('/praticiens/{id}',  PraticienAction::class);
+    $app->get('/praticiens/{id}',  PraticienAction::class)
+        ->add(AddHeaders::class)
+        ->add(AuthnMiddleware::class);
 
-    $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class);
+    $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class)
+        ->add(AddHeaders::class)
+        ->add(AuthnMiddleware::class);
 
-    $app->post('/rdvs', CreerRendezVousAction::class);
+    $app->post('/rdvs', CreerRendezVousAction::class)
+        ->add(AddHeaders::class)
+        ->add(AuthnMiddleware::class);
 
-    $app->get('/rdvs/{ID-RDV}', ConsulterRendezVousAction::class);
+    $app->get('/rdvs/{ID-RDV}', ConsulterRendezVousAction::class)
+        ->add(AddHeaders::class)
+        ->add(AuthnMiddleware::class);
 
 
-    $app->get('/praticiens/{ID-PRATICIEN}/disponibilites', ListerDispoPraticienAction::class);
+    $app->get('/praticiens/{ID-PRATICIEN}/disponibilites', ListerDispoPraticienAction::class)
+        ->add(AddHeaders::class)
+        ->add(AuthnMiddleware::class);
 
-    $app->post('/auth/signin', GenericGetCatalogAction00::class);
+    $app->post('/auth/signin', GenericGetCatalogAction00::class)
+        ->add(AddHeaders::class)
+        ->add(AuthnMiddleware::class);
     
     $app->post('/auth/validate', GenericGetCatalogAction00::class);
     
