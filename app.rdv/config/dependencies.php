@@ -1,7 +1,9 @@
 <?php
 
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Psr\Container\ContainerInterface;
 use toubeelibRdv\application\actions\ConsulterRendezVousAction;
+use toubeelibRdv\application\actions\CreerRendezVousAction;
 use toubeelibRdv\application\actions\SigninAction;
 use toubeelibRdv\core\provider\AuthProvider;
 use toubeelibRdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
@@ -12,7 +14,7 @@ use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
 use toubeelibRdv\infrastructure\adaptateur\PraticienServiceAdaptateur;
 use toubeelibRdv\infrastructure\repositories\ArrayRdvRepository;
 use PhpAmqpLib\Message\AMQPMessage;
-use PhpAmqpLib\Connection\AMQPStreamConnection;
+
 
 return [
 
@@ -39,6 +41,10 @@ return [
         $channel->exchange_declare($exchange_name, 'direct', false, true, false);
         $channel->queue_declare($queue_name, false, true, false, false);
         $channel->queue_bind($queue_name, $exchange_name, $routing_key);
+    },
+
+    CreerRendezVousAction::class => function (ContainerInterface $c) {
+        return new CreerRendezVousAction($c->get(ServiceRendezVousInterface::class), $c->get('rabbitmq'));
     },
 
 
