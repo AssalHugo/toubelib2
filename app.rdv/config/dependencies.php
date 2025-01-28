@@ -40,7 +40,6 @@ return [
         $channel->exchange_declare($exchange_name, 'direct', false, true, false);
         $channel->queue_declare($queue_name, false, true, false, false);
         $channel->queue_bind($queue_name, $exchange_name, $routing_key);
-
     },
 
 
