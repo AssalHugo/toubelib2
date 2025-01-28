@@ -18,9 +18,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 class CreerRendezVousAction extends AbstractAction
 {
     private ServiceRendezVousInterface $serviceRendezVous;
-    private $rdvService;
-    private $connection;
-    private $channel;
+  
     /**
      * Constructeur de la classe.
      * @param ServiceRendezVousInterface $serviceRendezVous
@@ -30,13 +28,6 @@ class CreerRendezVousAction extends AbstractAction
     {
         $this->serviceRendezVous = $serviceRendezVous;
 
-        $this->connection = $amqpConnection;
-        $this->channel = $amqpConnection->channel();
-        
-        // Configuration AMQP
-        $this->channel->exchange_declare('rdvs', 'direct', false, true, false);
-        $this->channel->queue_declare('rdv_notifications', false, true, false, false);
-        $this->channel->queue_bind('rdv_notifications', 'rdvs', 'rdv.cree');
 
     }
 
@@ -105,8 +96,8 @@ class CreerRendezVousAction extends AbstractAction
                 ]
             ];
             
-            $messageData = [
-                'event' => 'CREATE',
+            $this->serviceRendezVous->sendMessage([
+                'event' => 'RDVCREE',
                 'rdv' => [
                     'id' => $rdv->ID,
                     'creneau' => $rdv->creneau,
@@ -114,12 +105,7 @@ class CreerRendezVousAction extends AbstractAction
                     'idPraticien' => $rdv->praticien,
                     'idPatient' => $rdv->idPatient
                 ]
-            ];
-
-            $msg = new AMQPMessage(json_encode($messageData),
-            ['content_type' => 'application/json']);
-
-            $this->channel->basic_publish($msg, 'rdvs', 'rdv.cree');
+            ]);
 
 
             return JsonRenderer::render($rs, 201, $responseData);

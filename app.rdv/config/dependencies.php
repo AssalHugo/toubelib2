@@ -55,7 +55,9 @@ return [
 
     ServiceRendezVousInterface::class => function (ContainerInterface $c) {
         return new ServiceRendezVous($c->get(RendezVousRepositoryInterface::class) ,
-         $c->get(PraticienServiceInterface::class));
+         $c->get(PraticienServiceInterface::class),
+          $c->get('rabbitmq'));
+         
     },
 
     RendezVousRepositoryInterface::class => function (ContainerInterface $c) {

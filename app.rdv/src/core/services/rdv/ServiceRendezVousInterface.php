@@ -32,4 +32,6 @@ interface ServiceRendezVousInterface
      * @throws ServiceRendezVousInvalidDataException
      */
     public function listerPlanningPraticien(PlanningPraticienDTO $planningPraticienDTO): array;
+    public function sendMessage(array $messageData): void;
+
 }

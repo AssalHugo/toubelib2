@@ -13,3 +13,4 @@
 [2025-01-22T14:42:45.437381+00:00] my_logger.ERROR: Modification de rendez-vous échouée {"error":"Patient 3c4d5e6f-7890-1121-3141-5161c7d8e9f0 not found"} []
 [2025-01-22T14:45:10.025336+00:00] my_logger.ERROR: Modification de rendez-vous échouée {"error":"Patient 3c4d5e6f-7890-1121-3141-5161c7d8e9f0 not found"} []
 [2025-01-22T14:46:21.762900+00:00] my_logger.ERROR: Modification de rendez-vous échouée {"error":"Patient 3c4d5e6f-7890-1121-3141-5161c7d8e9f0 not found"} []
+[2025-01-28T16:04:11.106498+00:00] my_logger.INFO: Message sent to AMQP {"message":{"event":"RDVCREE","rdv":{"id":"770513d3-68d3-4eec-86e4-622bfd7e8672","creneau":"2024-11-16T10:00:00+00:00","specialitee":"1d2e3f4g-5678-9101-1121-3141h6i7j8k9","idPraticien":"4g5h6i7j-8901-1121-3141-6171k9l0m1n2","idPatient":"8o9p0q1r-2131-4151-6171-9202n3o4p5q6"}}} []
