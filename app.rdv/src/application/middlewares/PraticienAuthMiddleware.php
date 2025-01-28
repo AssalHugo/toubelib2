@@ -1,8 +1,8 @@
 <?php
 
-namespace toubeelib_rdv\application\middlewares;
+namespace toubeelibRdv\application\middlewares;
 
-use toubeelib_rdv\core\services\auth\AuthzService;
+use toubeelibRdv\core\services\auth\AuthzService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Psr\Http\Message\ResponseInterface as Response;

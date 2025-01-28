@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\ServerException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpForbiddenException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpNotFoundException;
@@ -36,9 +37,10 @@ class GenericGetCatalogAction extends AbstractAction
             
         }catch (ClientException $e) {
             match ($e->getCode()) {
-                400, 404 => throw new HttpNotFoundException($rq, "Ressource non trouvée"),
-                401 => throw new HttpUnauthorizedException($rq, "Non autorisé"),
-                403 => throw new HttpForbiddenException($rq, "Accès refusé"),
+                400 => throw new HttpBadRequestException($rq, "Requête incorrecte : " . $e->getMessage()),
+                404 => throw new HttpNotFoundException($rq, "Ressource non trouvée : " . $e->getMessage()),
+                401 => throw new HttpUnauthorizedException($rq, "Non autorisé :" . $e->getMessage()),
+                403 => throw new HttpForbiddenException($rq, "Accès refusé : " . $e->getMessage()),
                 default => throw new HttpInternalServerErrorException($rq, "Erreur interne du serveur : " . $e->getMessage()),
             };
         }

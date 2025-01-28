@@ -1,27 +1,20 @@
 <?php
 
-namespace toubeelib_rdv\infrastructure\repositories;
+namespace toubeelibRdv\infrastructure\repositories;
 
 use PDO;
 use Ramsey\Uuid\Uuid;
-use toubeelib_rdv\core\domain\entities\praticien\Praticien;
-use toubeelib_rdv\core\domain\entities\rendezvous\RendezVous;
-use toubeelib_rdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
-use toubeelib_rdv\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelibRdv\core\domain\entities\praticien\Praticien;
+use toubeelibRdv\core\domain\entities\rendezvous\RendezVous;
+use toubeelibRdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
+use toubeelibRdv\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 
 class ArrayRdvRepository implements RendezVousRepositoryInterface
 {
     private PDO $rdvDb;
-
-    private PDO $patientDb;
-
-    private PDO $praticienDb;
-
-    public function __construct(PDO $rdvDb, PDO $patientDb, PDO $praticienDb)
+    public function __construct(PDO $rdvDb)
     {
         $this->rdvDb = $rdvDb;
-        $this->patientDb = $patientDb;
-        $this->praticienDb = $praticienDb;
     }
 
     public function save(RendezVous $rendezVous): string
@@ -212,14 +205,6 @@ class ArrayRdvRepository implements RendezVousRepositoryInterface
 
     public function listerDispoPraticien(string $praticienId, \DateTimeImmutable $start, \DateTimeImmutable $end): array
     {
-        // Retrieve the Praticien entity
-        $stmt = $this->praticienDb->prepare('SELECT * FROM praticien WHERE id = :id');
-        $stmt->execute([':id' => $praticienId]);
-        $praticienData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$praticienData) {
-            throw new RepositoryEntityNotFoundException("Praticien $praticienId not found");
-        }
 
         $joursConsultation = Praticien::JOURS_CONSULTATION;
         $horairesConsultation = Praticien::HORAIRES_CONSULTATION;

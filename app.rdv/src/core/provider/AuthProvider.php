@@ -1,9 +1,9 @@
 <?php
 
-namespace toubeelib_rdv\core\provider;
+namespace toubeelibRdv\core\provider;
 
-use toubeelib_rdv\core\services\auth\AuthService;
-use toubeelib_rdv\core\dto\AuthDTO;
+use toubeelibRdv\core\services\auth\AuthService;
+use toubeelibRdv\core\dto\AuthDTO;
 use Firebase\JWT\JWT;
 use DateTimeImmutable;
 

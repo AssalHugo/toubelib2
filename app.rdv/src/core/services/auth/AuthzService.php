@@ -1,8 +1,8 @@
 <?php
 
-namespace toubeelib_rdv\core\services\auth;
+namespace toubeelibRdv\core\services\auth;
 
-use toubeelib_rdv\core\dto\AuthDTO;
+use toubeelibRdv\core\dto\AuthDTO;
 
 class AuthzService
 {

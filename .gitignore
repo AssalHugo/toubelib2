@@ -8,3 +8,4 @@ app.rdv/vendor/
 gateway/vendor
 *.ini
 app.auth/vendor/
+app-praticiens/vendor/

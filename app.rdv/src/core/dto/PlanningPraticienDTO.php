@@ -1,6 +1,7 @@
 <?php
 
-namespace toubeelib_rdv\core\dto;
+namespace toubeelibRdv\core\dto;
+
 
 use DateTimeImmutable;
 

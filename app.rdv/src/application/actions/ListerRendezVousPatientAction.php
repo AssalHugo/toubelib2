@@ -1,14 +1,14 @@
 <?php
 
-namespace toubeelib_rdv\application\actions;
+namespace toubeelibRdv\application\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Validator as v;
 use Slim\Exception\HttpBadRequestException;
-use toubeelib_rdv\application\renderer\JsonRenderer;
-use toubeelib_rdv\core\dto\IdPatientDTO;
-use toubeelib_rdv\core\services\rdv\ServiceRendezVousInterface;
+use toubeelibRdv\application\renderer\JsonRenderer;
+use toubeelibRdv\core\dto\IdPatientDTO;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
 
 class ListerRendezVousPatientAction extends AbstractAction
 {
@@ -40,7 +40,7 @@ class ListerRendezVousPatientAction extends AbstractAction
 
         try {
             $rdvs = $this->serviceRendezVousInterface->getRendezVousPatient($idPatientDTO);
-        } catch (\toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException $e) {
+        } catch (\toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException $e) {
             throw new HttpBadRequestException($rq, $e->getMessage());
         }
 

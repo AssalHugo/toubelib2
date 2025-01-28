@@ -1,6 +1,6 @@
 <?php
 
-namespace toubeelib_rdv\core\services\rdv;
+namespace toubeelibRdv\core\services\rdv;
 
 class ServiceRendezVousInvalidDataException extends \Exception
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace toubeelib_rdv\application\actions;
+namespace toubeelibRdv\application\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator as v;
 use Slim\Exception\HttpBadRequestException;
-use toubeelib_rdv\application\renderer\JsonRenderer;
-use toubeelib_rdv\core\dto\GererCycleRendezVousDTO;
-use toubeelib_rdv\core\services\rdv\ServiceRendezVousInterface;
+use toubeelibRdv\application\renderer\JsonRenderer;
+use toubeelibRdv\core\dto\GererCycleRendezVousDTO;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
 
 class GererCycleRendezVousAction extends AbstractAction
 {
@@ -70,7 +70,7 @@ class GererCycleRendezVousAction extends AbstractAction
             ];
 
             return JsonRenderer::render($rs, 200, $data);
-        } catch (\toubeelib\core\services\rdv\ServiceRendezVousInvalidDataException $e) {
+        } catch (\toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException $e) {
             throw new HttpBadRequestException($rq, $e->getMessage());
         }
     }

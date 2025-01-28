@@ -1,11 +1,11 @@
 <?php
 
-namespace toubeelib_rdv\application\actions;
+namespace toubeelibRdv\application\actions;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\HttpException;
-use toubeelib_rdv\core\provider\AuthProvider;
+use toubeelibRdv\core\provider\AuthProvider;
 use Slim\Psr7\Response as SlimResponse;
 
 class SigninAction

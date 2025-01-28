@@ -1,8 +1,8 @@
 <?php
 
-namespace toubeelib_rdv\core\dto;
+namespace toubeelibRdv\core\dto;
 
-use toubeelib_rdv\core\domain\entities\rendezvous\RendezVous;
+use toubeelibRdv\core\domain\entities\rendezvous\RendezVous;
 
 class ModificationRendezVousDTO extends DTO
 {

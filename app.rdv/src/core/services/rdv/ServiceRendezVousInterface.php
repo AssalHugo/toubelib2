@@ -1,15 +1,15 @@
 <?php
 
-namespace toubeelib_rdv\core\services\rdv;
+namespace toubeelibRdv\core\services\rdv;
 
 
-use toubeelib_rdv\core\dto\IdRendezVousDTO;
-use toubeelib_rdv\core\dto\InputDispoPraticienDTO;
-use toubeelib_rdv\core\dto\InputRendezVousDTO;
-use toubeelib_rdv\core\dto\ModificationRendezVousDTO;
-use toubeelib_rdv\core\dto\PlanningPraticienDTO;
-use toubeelib_rdv\core\dto\RendezVousDTO;
-use toubeelib_rdv\core\services\rdv\ServiceRendezVousInvalidDataException;
+use toubeelibRdv\core\dto\IdRendezVousDTO;
+use toubeelibRdv\core\dto\InputDispoPraticienDTO;
+use toubeelibRdv\core\dto\InputRendezVousDTO;
+use toubeelibRdv\core\dto\ModificationRendezVousDTO;
+use toubeelibRdv\core\dto\PlanningPraticienDTO;
+use toubeelibRdv\core\dto\RendezVousDTO;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException;
 
 interface ServiceRendezVousInterface
 {

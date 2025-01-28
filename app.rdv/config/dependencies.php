@@ -1,24 +1,18 @@
 <?php
 
 use Psr\Container\ContainerInterface;
-use toubeelib_rdv\application\actions\ConsulterRendezVousAction;
-use toubeelib_rdv\application\actions\SigninAction;
-use toubeelib_rdv\core\provider\AuthProvider;
-use toubeelib_rdv\core\repositoryInterfaces\PatientRepositoryInterface;
-use toubeelib_rdv\core\repositoryInterfaces\PraticienRepositoryInterface;
-use toubeelib_rdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
-use toubeelib_rdv\core\services\auth\AuthService;
-use toubeelib_rdv\core\services\praticien\ServicePraticienInterface;
-use toubeelib_rdv\core\services\praticien\ServicePraticien;
-use toubeelib_rdv\core\services\rdv\ServiceRendezVous;
-use toubeelib_rdv\core\services\rdv\ServiceRendezVousInterface;
-use toubeelib_rdv\infrastructure\repositories\ArrayPatientRepository;
-use toubeelib_rdv\infrastructure\repositories\ArrayPraticienRepository;
-use toubeelib_rdv\infrastructure\repositories\ArrayRdvRepository;
+use toubeelibRdv\application\actions\ConsulterRendezVousAction;
+use toubeelibRdv\application\actions\SigninAction;
+use toubeelibRdv\core\provider\AuthProvider;
+use toubeelibRdv\core\repositoryInterfaces\RendezVousRepositoryInterface;
+use toubeelibRdv\core\services\auth\AuthService;
+use toubeelibRdv\core\services\praticien\PraticienServiceInterface;
+use toubeelibRdv\core\services\rdv\ServiceRendezVous;
+use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
+use toubeelibRdv\infrastructure\adaptateur\PraticienServiceAdaptateur;
+use toubeelibRdv\infrastructure\repositories\ArrayRdvRepository;
 
 return [
-
-
 
     'rdv.pdo' => function (ContainerInterface $c) {
         $config = parse_ini_file(__DIR__ . '/rdv.db.ini');
@@ -28,21 +22,10 @@ return [
         return new PDO($dsn, $user, $password);
     },
 
-    'patient.pdo' => function (ContainerInterface $c) {
-        $config = parse_ini_file(__DIR__ . '/patient.db.ini');
-        $dsn = "{$config['driver']}:host={$config['host']};dbname={$config['database']}";
-        $user = $config['username'];
-        $password = $config['password'];
-        return new PDO($dsn, $user, $password);
-    },
-
-    
-    'praticien.pdo' => function (ContainerInterface $c) {
-        $config = parse_ini_file(__DIR__ . '/praticien.db.ini');
-        $dsn = "{$config['driver']}:host={$config['host']};dbname={$config['database']}";
-        $user = $config['username'];
-        $password = $config['password'];
-        return new PDO($dsn, $user, $password);
+    'guzzlePraticiens' => function(ContainerInterface $container) {
+        return new GuzzleHttp\Client([
+            'base_uri' => $container->get('toubelibPraticien.api')
+        ]);
     },
 
 
@@ -51,17 +34,15 @@ return [
     },
 
     ServiceRendezVousInterface::class => function (ContainerInterface $c) {
-        return new ServiceRendezVous($c->get(RendezVousRepositoryInterface::class) , $c->get(PraticienRepositoryInterface::class));
+        return new ServiceRendezVous($c->get(RendezVousRepositoryInterface::class) , $c->get(PraticienServiceInterface::class));
     },
 
     RendezVousRepositoryInterface::class => function (ContainerInterface $c) {
-        return new ArrayRdvRepository($c->get('rdv.pdo'), $c->get('patient.pdo'), $c->get('praticien.pdo'));
+        return new ArrayRdvRepository($c->get('rdv.pdo'));
     },
-    ServicePraticienInterface::class => function (ContainerInterface $c) {
-        return new ServicePraticien($c->get(PraticienRepositoryInterface::class));
-    },
-    PraticienRepositoryInterface::class => function (ContainerInterface $c) {
-        return new ArrayPraticienRepository($c->get('praticien.pdo'));
+
+    PraticienServiceInterface::class => function (ContainerInterface $c) {
+        return new PraticienServiceAdaptateur($c->get('guzzlePraticiens'));
     },
 
    
