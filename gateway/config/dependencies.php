@@ -11,6 +11,7 @@ use Gateway\Actions\ConsulterRendezVousAction;
 use Gateway\Actions\ModifierOuGererCycleRendezVousAction;
 use Gateway\Actions\AnnulerRendezVousAction;
 use Gateway\Actions\ValidateAction;
+use Gateway\Actions\GenericGetCatalogAction00;
 
 
 
@@ -85,6 +86,10 @@ return [
 
     ValidateAction::class => function (ContainerInterface $container) {
         return new ValidateAction($container->get('guzzle3'));
+    },
+
+    GenericGetCatalogAction00::class => function(ContainerInterface $container) {
+        return new GenericGetCatalogAction00($container->get('guzzle3'));
     },
 
 ];

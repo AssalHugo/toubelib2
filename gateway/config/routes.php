@@ -9,6 +9,7 @@ use Gateway\Actions\ListerDispoPraticienAction;
 use Gateway\Actions\PraticienAction;
 use Slim\App;
 use Gateway\middlewares\AddHeaders;
+use Gateway\Actions\GenericGetCatalogAction00;
 
 
 return function (App $app): App {
@@ -28,9 +29,9 @@ return function (App $app): App {
 
     $app->get('/praticiens/{ID-PRATICIEN}/disponibilites', ListerDispoPraticienAction::class);
 
-    $app->post('/auth/signin', GenericGetCatalogAction::class);
+    $app->post('/auth/signin', GenericGetCatalogAction00::class);
     
-    $app->post('/auth/validate', GenericGetCatalogAction::class);
+    $app->post('/auth/validate', GenericGetCatalogAction00::class);
     
 
     

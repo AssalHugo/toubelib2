@@ -24,6 +24,6 @@ EXPOSE 80
 
 
 
-COPY php.ini /usr/local/etc/php/
+# COPY php.ini /usr/local/etc/php/
 
 

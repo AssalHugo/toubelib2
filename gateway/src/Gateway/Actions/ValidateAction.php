@@ -18,7 +18,8 @@ class ValidateAction extends AbstractAction
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
         try {            
-            return $this->remote->post('/auth/validate');
+            echo "ValidateAction";
+            return $this->remote->POST('/auth/validate');
         }
         catch (ClientException $e) {            
             match ($e->getCode()) {                
