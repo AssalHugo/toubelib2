@@ -22,6 +22,8 @@ services:
       - toubeelib.db
     command: php -S 0.0.0.0:80 -t /var/php/public
 
+
+
     # service toubeelib.db : base de données postgresql
   toubeelib.db:
     image: 'postgres:latest'
@@ -45,6 +47,20 @@ services:
     networks:
       - toubeelib.net
   
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    networks:
+      - toubeelib.net
 
   # Service pour la gateway
   gateway.toubeelib:
@@ -63,6 +79,43 @@ services:
       - toubeelib.db
     command: php -S 0.0.0.0:80 -t /var/php/public
 
+  #
+  api.toubeelib-rdvs:
+    #  image: 'canals/php:8.3-cli'
+    build:
+      context: build
+      dockerfile: 8.3-cli.Dockerfile
+    env_file: ./toubeelib.env
+    ports:
+      - '6082:80'
+    volumes:
+      - ./app.rdv:/var/php
+    working_dir: /var/php
+    networks:
+      - toubeelib.net
+    depends_on:
+      - toubeelib.db
+    command: php -S 0.0.0.0:80 -t /var/php/public
+
+  api.toubeelib-auth:
+    #  image: 'canals/php:8.3-cli'
+    build:
+      context: build
+      dockerfile: 8.3-cli.Dockerfile
+    env_file: ./toubeelib.env
+    ports:
+      - '6083:80'
+    volumes:
+      - ./app.auth:/var/php
+    working_dir: /var/php
+    networks:
+      - toubeelib.net
+    depends_on:
+      - toubeelib.db
+    command: php -S 0.0.0.0:80 -t /var/php/public
+
+
+
   #Service api pour app-praticiens
   api.toubeelib-praticiens:
     build:
@@ -79,3 +132,27 @@ services:
     depends_on:
       - toubeelib.db
     command: php -S 0.0.0.0:80 -t /var/php/public
+
+  api.toubeelib-mail:
+    build:
+      context: build
+      dockerfile: 8.3-cli.Dockerfile
+    env_file: ./toubeelib.env
+    ports:
+      - '6084:80'
+    volumes:
+      - ./app.mail:/var/php
+    working_dir: /var/php
+    networks:
+      - toubeelib.net
+    depends_on:
+      - rabbitmq
+    command: php -S 0.0.0.0:80 -t /var/php/public
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - '1080:1080' # Interface web de MailCatcher
+      - '1025:1025' # Port 
+    networks:
+      - toubeelib.net

@@ -4,8 +4,10 @@
 *.idea
 *.lock
 app/vendor/
+app.rdv/vendor/
 gateway/vendor
 *.ini
+app.auth/vendor/
 app-praticiens/vendor/
 app.rdv/vendor/
 app.mail/vendor
