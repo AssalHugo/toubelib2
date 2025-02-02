@@ -12,18 +12,23 @@ use toubeelibRdv\application\renderer\JsonRenderer;
 use toubeelibRdv\core\dto\InputRendezVousDTO;
 use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
 use toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class CreerRendezVousAction extends AbstractAction
 {
     private ServiceRendezVousInterface $serviceRendezVous;
-
+  
     /**
      * Constructeur de la classe.
      * @param ServiceRendezVousInterface $serviceRendezVous
      */
-    public function __construct(ServiceRendezVousInterface $serviceRendezVous)
+    public function __construct(ServiceRendezVousInterface $serviceRendezVous, AMQPStreamConnection $amqpConnection
+    )
     {
         $this->serviceRendezVous = $serviceRendezVous;
+
+
     }
 
     /**
@@ -48,11 +53,10 @@ class CreerRendezVousAction extends AbstractAction
             throw new HttpBadRequestException($rq, $e->getMessage());
         }
 
-        // Validation et conversion du créneau (en DateTimeImmutable)
         try {
             $creneau = new DateTimeImmutable($data['creneau']);
         } catch (Exception $e) {
-            throw new HttpBadRequestException($rq, 'Invalid date format for creneau');
+            throw new HttpBadRequestException($rq, 'format de date invalide pour creneau');
         }
 
         // Création du DTO pour le rendez-vous
@@ -90,8 +94,22 @@ class CreerRendezVousAction extends AbstractAction
                     ]
                 ]
             ];
+            
+            $this->serviceRendezVous->sendMessage([
+                'evenement' => 'RDVCREE',
+                'email' => 'test@example.com', // Ajout de l'email
+                'rdv' => [
+                    'id' => $rdv->ID,
+                    'creneau' => $rdv->creneau,
+                    'specialitee' => $rdv->specialitee,
+                    'idPraticien' => $rdv->praticien,
+                    'idPatient' => $rdv->idPatient
+                ]
+            ]);
+
 
             return JsonRenderer::render($rs, 201, $responseData);
+
 
         } catch (ServiceRendezVousInvalidDataException $e) {
             throw new HttpBadRequestException($rq, $e->getMessage());

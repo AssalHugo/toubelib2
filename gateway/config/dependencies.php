@@ -41,6 +41,12 @@ return [
         ]);
     },
 
+    'guzzlePraticiens' => function(ContainerInterface $container) {
+        return new GuzzleHttp\Client([
+            'base_uri' => $container->get('toubelibPraticien.api')
+        ]);
+    },
+
     //On définit la dépendance ListePraticiensAction
     ListePraticiensAction::class => function(ContainerInterface $container) {
         return new GenericGetCatalogAction($container->get('guzzlePraticiens'));

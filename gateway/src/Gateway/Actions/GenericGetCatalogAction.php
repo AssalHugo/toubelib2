@@ -38,6 +38,7 @@ class GenericGetCatalogAction extends AbstractAction
             
         }catch (ClientException $e) {
             match ($e->getCode()) {
+                var_dump($rq),
                 400 => throw new HttpBadRequestException($rq, "Requête incorrecte : " . $e->getMessage()),
                 404 => throw new HttpNotFoundException($rq, "Ressource non trouvée : " . $e->getMessage()),
                 401 => throw new HttpUnauthorizedException($rq, "Non autorisé :" . $e->getMessage()),

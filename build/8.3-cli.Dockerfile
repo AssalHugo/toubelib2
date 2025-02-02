@@ -13,17 +13,14 @@ RUN curl -sSLf \
     chmod +x /usr/local/bin/install-php-extensions
 
 # PHP Configuration
-RUN install-php-extensions  mongodb
-RUN install-php-extensions  gettext iconv intl  tidy zip sockets
-RUN install-php-extensions  pgsql mysqli
-RUN install-php-extensions  pdo_mysql pdo_pgsql
-RUN install-php-extensions  xdebug
-RUN install-php-extensions  redis
+RUN install-php-extensions mongodb
+RUN install-php-extensions gettext iconv intl mbstring tidy zip sockets
+RUN install-php-extensions pgsql mysqli
+RUN install-php-extensions pdo_mysql pdo_pgsql
+RUN install-php-extensions xdebug
+RUN install-php-extensions redis
+RUN install-php-extensions amqp 
 RUN install-php-extensions @composer
 EXPOSE 80
 
-
-
-# COPY php.ini /usr/local/etc/php/
-
-
+COPY php.ini /usr/local/etc/php/

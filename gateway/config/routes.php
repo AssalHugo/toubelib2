@@ -50,6 +50,6 @@ return function (App $app): App {
     ;
     
 
-    
+
     return $app;
 };

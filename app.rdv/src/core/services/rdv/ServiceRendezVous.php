@@ -20,24 +20,49 @@ use Monolog\Handler\StreamHandler;
 use toubeelibRdv\core\services\praticien\PraticienServiceInterface;
 use toubeelibRdv\core\services\rdv\ServiceRendezVousInterface;
 use toubeelibRdv\core\services\rdv\ServiceRendezVousInvalidDataException;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 
 class ServiceRendezVous implements ServiceRendezVousInterface
 {
-
     private RendezVousRepositoryInterface $rendezVousRepository;
     private PraticienServiceInterface $praticienRepository;
-
     private $logger;
+    private $channel;
 
-    public function __construct(RendezVousRepositoryInterface $rendezVousRepository, PraticienServiceInterface $praticienRepository)
-    {
+    public function __construct(
+        RendezVousRepositoryInterface $rendezVousRepository,
+        PraticienServiceInterface $praticienRepository,
+        AMQPStreamConnection $amqpConnection
+    ) {
         $this->rendezVousRepository = $rendezVousRepository;
         $this->praticienRepository = $praticienRepository;
+
         $logger = new Logger('my_logger');
         $this->logger = $logger->pushHandler(new StreamHandler(__DIR__ . 'error.log', Logger::INFO));
+
+        // Configuration AMQP
+        $this->channel = $amqpConnection->channel();
+        $this->channel->exchange_declare('rdvs', 'direct', false, true, false);
+        $this->channel->queue_declare('rdv_notifications', false, true, false, false);
+        $this->channel->queue_bind('rdv_notifications', 'rdvs', 'rdv.cree');
     }
 
+    public function sendMessage(array $messageData): void
+    {
+        try {
+            $msg = new AMQPMessage(json_encode($messageData), [
+                'content_type' => 'application/json',
+            ]);
+            $this->channel->basic_publish($msg, 'rdvs', 'rdv.cree');
+            $this->logger->info('Message sent to AMQP', ['message' => $messageData]);
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to send message to AMQP', ['error' => $e->getMessage()]);
+        }
+    }
+
+    // Les autres méthodes restent inchangées
 
     /**
      * @throws ServiceRendezVousInvalidDataException
