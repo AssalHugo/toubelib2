@@ -14,7 +14,8 @@
     "ext-pdo": "*",
     "guzzlehttp/guzzle": "^7.0",
     "slim/http": "^1.0",
-    "php-amqplib/php-amqplib": "^2.6"
+    "php-amqplib/php-amqplib": "^2.6",
+    "symfony/mailer": "^7.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^11.0",
@@ -22,7 +23,7 @@
   },
   "autoload": {
     "psr-4" : {
-      "toubeelib\\" : "./src"
+      "appMail\\" : "./src"
     }
   }
 }

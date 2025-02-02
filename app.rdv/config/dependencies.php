@@ -33,15 +33,15 @@ return [
     },
 
     'rabbitmq' => function(ContainerInterface $container){
-        $exchange_name = 'testExanges';
-        $queue_name = 'testqueues';
+        $exchange_name = 'rdvs';
+        $queue_name = 'rdv_notifications';
         $routing_key = 'routing';
         $connection = new AMQPStreamConnection('rabbitmq', 5672, 'admin', 'admin');
         $channel = $connection->channel();
         $channel->exchange_declare($exchange_name, 'direct', false, true, false);
         $channel->queue_declare($queue_name, false, true, false, false);
         $channel->queue_bind($queue_name, $exchange_name, $routing_key);
-        return $connection; // Ajout de cette ligne pour retourner l'objet AMQPStreamConnection
+        return $connection; 
     },
 
     CreerRendezVousAction::class => function (ContainerInterface $c) {

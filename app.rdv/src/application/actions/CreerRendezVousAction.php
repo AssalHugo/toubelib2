@@ -53,11 +53,10 @@ class CreerRendezVousAction extends AbstractAction
             throw new HttpBadRequestException($rq, $e->getMessage());
         }
 
-        // Validation et conversion du créneau (en DateTimeImmutable)
         try {
             $creneau = new DateTimeImmutable($data['creneau']);
         } catch (Exception $e) {
-            throw new HttpBadRequestException($rq, 'Invalid date format for creneau');
+            throw new HttpBadRequestException($rq, 'format de date invalide pour creneau');
         }
 
         // Création du DTO pour le rendez-vous
@@ -97,7 +96,8 @@ class CreerRendezVousAction extends AbstractAction
             ];
             
             $this->serviceRendezVous->sendMessage([
-                'event' => 'RDVCREE',
+                'evenement' => 'RDVCREE',
+                'email' => 'test@example.com', // Ajout de l'email
                 'rdv' => [
                     'id' => $rdv->ID,
                     'creneau' => $rdv->creneau,

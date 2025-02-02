@@ -9,3 +9,4 @@ gateway/vendor
 *.ini
 app.auth/vendor/
 app-praticiens/vendor/
+app.mail/vendor
