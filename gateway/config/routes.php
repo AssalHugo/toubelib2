@@ -15,40 +15,23 @@ use Gateway\Actions\GenericGetCatalogAction01;
 
 return function (App $app): App {
 
-    $app->get('/', ExampleAction::class);
+    $app->add(AddHeaders::class); 
 
-    $app->get('/praticiens', ListePraticiensAction::class);
+    $app->group('', function ($app) {
+        $app->get('/praticiens/{id}', PraticienAction::class);
+        $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class);
+        $app->post('/rdvs', GenericGetCatalogAction01::class);
+        $app->get('/rdvs/{ID-RDV}', GenericGetCatalogAction01::class);
+        $app->get('/praticiens/{ID-PRATICIEN}/disponibilites', ListerDispoPraticienAction::class);
+    })->add(AuthnMiddleware::class); 
 
-    $app->get('/praticiens/{id}',  PraticienAction::class)
-        ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class);
+    $app->post('/auth/signin', GenericGetCatalogAction00::class); 
+    $app->post('/auth/validate', GenericGetCatalogAction00::class); 
 
-    $app->get('/praticiens/{id}/planning', GenericGetCatalogAction::class)
-        ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class);
-
-    $app->post('/rdvs', GenericGetCatalogAction01::class)
-        ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class)
-        ;
-
-    $app->get('/rdvs/{ID-RDV}', GenericGetCatalogAction01::class)
-        ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class)
-        ;
-
-
-    $app->get('/praticiens/{ID-PRATICIEN}/disponibilites', ListerDispoPraticienAction::class)
-        ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class);
-
-    $app->post('/auth/signin', GenericGetCatalogAction00::class);
-    
-    $app->post('/auth/validate', GenericGetCatalogAction00::class)
-    ->add(AddHeaders::class)
-    
-    ;
-    
+    $app->options('/{routes:.+}', function ($request, $response) {
+        return $response;
+    })->add(AddHeaders::class);
+        
 
 
     return $app;
