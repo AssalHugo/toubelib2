@@ -11,7 +11,7 @@ use Slim\App;
 use Gateway\middlewares\AddHeaders;
 use Gateway\Actions\GenericGetCatalogAction00;
 use Gateway\middlewares\AuthnMiddleware;
-
+use Gateway\Actions\GenericGetCatalogAction01;
 
 return function (App $app): App {
 
@@ -27,24 +27,27 @@ return function (App $app): App {
         ->add(AddHeaders::class)
         ->add(AuthnMiddleware::class);
 
-    $app->post('/rdvs', CreerRendezVousAction::class)
+    $app->post('/rdvs', GenericGetCatalogAction01::class)
         ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class);
+        ->add(AuthnMiddleware::class)
+        ;
 
-    $app->get('/rdvs/{ID-RDV}', ConsulterRendezVousAction::class)
+    $app->get('/rdvs/{ID-RDV}', GenericGetCatalogAction01::class)
         ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class);
+        ->add(AuthnMiddleware::class)
+        ;
 
 
     $app->get('/praticiens/{ID-PRATICIEN}/disponibilites', ListerDispoPraticienAction::class)
         ->add(AddHeaders::class)
         ->add(AuthnMiddleware::class);
 
-    $app->post('/auth/signin', GenericGetCatalogAction00::class)
-        ->add(AddHeaders::class)
-        ->add(AuthnMiddleware::class);
+    $app->post('/auth/signin', GenericGetCatalogAction00::class);
     
-    $app->post('/auth/validate', GenericGetCatalogAction00::class);
+    $app->post('/auth/validate', GenericGetCatalogAction00::class)
+    ->add(AddHeaders::class)
+    
+    ;
     
 
     

@@ -22,7 +22,7 @@ class AuthnMiddleware
         $this->auth_service = $auth_service;
     }
 
-    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $next): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         
         if (!$request->hasHeader('Authorization')) {
@@ -30,27 +30,25 @@ class AuthnMiddleware
         }
 
         
-        $token_line = $request->getHeaderLine('Authorization');
-        list($token) = sscanf($token_line, "Bearer %s");
-
-        
-        $response = new Response();
+        $authHeader = $request->getHeader('Authorization')[0];
+        $token = str_replace('Bearer ', '', $authHeader);
 
         try {
             
-            $response = $this->auth_service->__invoke($request, $response, ['token' => $token]);
+            $response = $this->auth_service->__invoke($request, new Response(), [
+                'json' => ['token' => $token]
+                ]
+        );
+            
+            
+            return $handler->handle($request);
+            
         } catch (ConnectException | ServerException $e) {
             
-            throw new HttpInternalServerErrorException($request, "Internal server error: " . $e->getMessage());
+            throw new HttpInternalServerErrorException($request, "Server error: {$e->getMessage()}");
         } catch (ClientException $e) {
             
-            match ($e->getCode()) {
-                401 => throw new HttpUnauthorizedException($request, "Unauthorized: " . $e->getMessage()),
-                default => throw new HttpInternalServerErrorException($request, "Internal server error: " . $e->getMessage()),
-            };
+            throw new HttpUnauthorizedException($request, "Unauthorized: {$e->getMessage()}");
         }
-
-        
-        return $next->handle($request);
     }
 }

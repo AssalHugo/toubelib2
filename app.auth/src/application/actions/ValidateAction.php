@@ -25,6 +25,7 @@ class ValidateAction
         $authHeader = $request->getHeader('Authorization');
 
         if (!$authHeader || empty($authHeader[0])) {
+            var_dump($authHeader);
             throw new HttpException($request, "header invalide", 401);
         }
 
@@ -35,6 +36,7 @@ class ValidateAction
             $request = $request->withAttribute('auth', $decoded);
             return $response->withStatus(200)->withJson(['message' => 'Token is valid']);
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             throw new HttpException($request, "Invalid token", 401);
         }
     }   
