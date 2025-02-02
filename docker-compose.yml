@@ -51,16 +51,16 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
-        - 5672:5672
-        - 15672:15672
+      - 5672:5672
+      - 15672:15672
     volumes:
-        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
     networks:
-        - toubeelib.net
+      - toubeelib.net
 
   # Service pour la gateway
   gateway.toubeelib:
@@ -81,7 +81,7 @@ services:
 
   #
   api.toubeelib-rdvs:
-  #  image: 'canals/php:8.3-cli'
+    #  image: 'canals/php:8.3-cli'
     build:
       context: build
       dockerfile: 8.3-cli.Dockerfile
@@ -98,7 +98,7 @@ services:
     command: php -S 0.0.0.0:80 -t /var/php/public
 
   api.toubeelib-auth:
-  #  image: 'canals/php:8.3-cli'
+    #  image: 'canals/php:8.3-cli'
     build:
       context: build
       dockerfile: 8.3-cli.Dockerfile
